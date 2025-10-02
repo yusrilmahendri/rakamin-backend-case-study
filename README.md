@@ -3,8 +3,8 @@ AI-Powered Candidate Screening Backend
 A backend service to evaluate candidate CVs and project reports against a job description and case study brief using AI/LLM + RAG pipeline.
 
 **Candidate Information**
-    Full Name: Yusril Mahendri, S.Kom.
-    Email: yusrilmahendri.yusril@gmail.com
+Full Name: Yusril Mahendri, S.Kom.
+Email: yusrilmahendri.yusril@gmail.com
 
 **Approach & Design**
     Endpoints:
@@ -47,7 +47,7 @@ A backend service to evaluate candidate CVs and project reports against a job de
     Kandidat tanpa pengalaman relevan → evaluasi tetap jalan dengan feedback default.
 
 🔑 **Authentication (Sanctum)**
-    POST /api/register
+   ``` POST /api/register
     {
       "name": "User",
       "email": "user@example.com",
@@ -64,10 +64,10 @@ A backend service to evaluate candidate CVs and project reports against a job de
     {
       "user": { "id": 1, "name": "User", "email": "user@example.com" },
       "token": "1|abcdefg..."
-    }
+    }```
     
 📌 **API Endpoints**
-    Upload CV & Report
+   ``` Upload CV & Report
         POST /api/upload
         Content-Type: multipart/form-data
         Authorization: Bearer <token>
@@ -116,12 +116,12 @@ A backend service to evaluate candidate CVs and project reports against a job de
                 "created_at": "2025-10-02T18:56:18.000000Z",
                 "updated_at": "2025-10-02T18:56:18.000000Z"
             }
-        }
+        }```
 
 **testing**
 Gunakan Postman atau cURL untuk mencoba semua endpoint.
 Atau jalankan queue worker:
-    php artisan queue:work
+    ```php artisan queue:work```
 
  📂 **Project Structure**
  ```app/
@@ -146,23 +146,21 @@ Atau jalankan queue worker:
 - Queue (Sync/Database/Redis)
 
 ## ⚙️ Setup Project
-
 1. **Clone Repository**
-   ```bash
-   git clone https://github.com/yusrilmahendri/rakamin-backend-case-study.git
-   cd rakamin-backend-case-study
+   ```git clone https://github.com/yusrilmahendri/rakamin-backend-case-study.git
+   cd rakamin-backend-case-study```
 
 2. **Install Dependencies**
-    composer install
+    ```composer install```
     
 3. **Setup Environment**
     Copy .env.example ke .env lalu sesuaikan konfigurasi:
        cp .env.example .env
     Database config (DB_DATABASE, DB_USERNAME, DB_PASSWORD)
     OpenAI API Key:
-        OPENAI_API_KEY=your_api_key_here
+        ```OPENAI_API_KEY=your_api_key_here```
 4. **Generate App Key**
-    php artisan key:generate
+    ```php artisan key:generate```
 5. **Migrate Database**
     php artisan migrate
 
