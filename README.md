@@ -47,24 +47,24 @@ Email: yusrilmahendri.yusril@gmail.com
     Kandidat tanpa pengalaman relevan → evaluasi tetap jalan dengan feedback default.
 
 🔑 **Authentication (Sanctum)**<br>
-    POST /api/register<br>
+    POST /api/register
     ```{
       "name": "User",
       "email": "user@example.com",
       "password": "secret123",
       "password_confirmation": "secret123"
-    }<br>
-    **LOGIN**<br>
+    }
+    **LOGIN**
     POST /api/login<br>
-    ```{
+    {
       "email": "user@example.com",
       "password": "secret123"
-    }```
+    }
     Response akan mengembalikan token:
-   ``` {
+   {
       "user": { "id": 1, "name": "User", "email": "user@example.com" },
       "token": "1|abcdefg..."
-    }<br>
+    }
     
 📌 **API Endpoints**<br>
      Upload CV & Report
