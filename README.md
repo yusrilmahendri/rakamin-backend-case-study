@@ -8,13 +8,13 @@ Email: yusrilmahendri.yusril@gmail.com
 
 **Approach & Design**
     Endpoints:
-        /v1/register → Endpoint untuk mendaftar user baru.
+      ``  /v1/register → Endpoint untuk mendaftar user baru.
         /v1//login → Endpoint untuk login user.
         /v1/logout → Logout user, token dihapus.
         /v1/upload → Upload file atau data untuk dievaluasi (misal dokumen).
         /v1/evaluate → Menjalankan proses evaluasi berdasarkan data yang diupload.
         /v1/status/{id} → Mengecek status evaluasi berdasarkan id.
-        /v1/result/{id} → Mengambil hasil evaluasi berdasarkan id.
+        /v1/result/{id} → Mengambil hasil evaluasi berdasarkan id. ```
     Database Schema:
         documents → menyimpan file CV, Report, JobDesc, Rubric.
         jobs → menyimpan status evaluasi (queued, processing, completed, failed).
@@ -46,38 +46,38 @@ Email: yusrilmahendri.yusril@gmail.com
     API LLM timeout.
     Kandidat tanpa pengalaman relevan → evaluasi tetap jalan dengan feedback default.
 
-🔑 **Authentication (Sanctum)**
-    POST /api/register
+🔑 **Authentication (Sanctum)**<br>
+    POST /api/register<br>
     ```{
       "name": "User",
       "email": "user@example.com",
       "password": "secret123",
       "password_confirmation": "secret123"
     }```
-    **LOGIN**
-    POST /api/login
+    **LOGIN**<br>
+    POST /api/login<br>
     ```{
       "email": "user@example.com",
       "password": "secret123"
-    }```
+    }```<br>
     Response akan mengembalikan token:
    ``` {
       "user": { "id": 1, "name": "User", "email": "user@example.com" },
       "token": "1|abcdefg..."
     }```
     
-📌 **API Endpoints**
+📌 **API Endpoints**<br>
      Upload CV & Report
         POST /api/upload
         Content-Type: multipart/form-data
         Authorization: Bearer <token>
         cv: file.pdf
-        report: file.pdf
+        report: file.pdf<br>
     
     response 
-        ```{ "cv_id": 1, "report_id": 2 }```
+        ```{ "cv_id": 1, "report_id": 2 }```<br>
         
-    Evaluate
+        Evaluate
         POST /api/evaluate
         Authorization: Bearer <token>
 
@@ -85,7 +85,7 @@ Email: yusrilmahendri.yusril@gmail.com
        ```{
             "id": 2,
             "status": "queued"
-        }```
+        }```<br>
 
     Check Status
         GET /api/status/{jobId}
@@ -95,7 +95,7 @@ Email: yusrilmahendri.yusril@gmail.com
     ```    {
             "id": 1,
             "status": "completed"
-        }```
+        }```<br>
 
     Get Result
         GET /api/result/{jobId}
