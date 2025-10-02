@@ -8,13 +8,13 @@ Email: yusrilmahendri.yusril@gmail.com
 
 **Approach & Design**
     Endpoints:<br>
-        /v1/register → Endpoint untuk mendaftar user baru.<br>
-        /v1//login → Endpoint untuk login user.<br>
-        /v1/logout → Logout user, token dihapus.<br>
-        /v1/upload → Upload file atau data untuk dievaluasi (misal dokumen).<br>
-        /v1/evaluate → Menjalankan proses evaluasi berdasarkan data yang diupload.<br>
-        /v1/status/{id} → Mengecek status evaluasi berdasarkan id.<br>
-        /v1/result/{id} → Mengambil hasil evaluasi berdasarkan id. <br>
+         </n>/v1/register → Endpoint untuk mendaftar user baru.<br>
+         </n>/v1//login → Endpoint untuk login user.<br>
+         </n>/v1/logout → Logout user, token dihapus.<br>
+         </n>v1/upload → Upload file atau data untuk dievaluasi (misal dokumen).<br>
+         </n>/v1/evaluate → Menjalankan proses evaluasi berdasarkan data yang diupload.<br>
+         </n>/v1/status/{id} → Mengecek status evaluasi berdasarkan id.<br>
+         </n>/v1/result/{id} → Mengambil hasil evaluasi berdasarkan id. <br>
     Database Schema:<br>
         documents → menyimpan file CV, Report, JobDesc, Rubric.<br>
         jobs → menyimpan status evaluasi (queued, processing, completed, failed).<br>
@@ -58,7 +58,7 @@ Email: yusrilmahendri.yusril@gmail.com
     }```
 
     
-    **LOGIN**
+    LOGIN
     POST /api/login<br>
    ``` {
       "email": "user@example.com",
@@ -71,7 +71,7 @@ Email: yusrilmahendri.yusril@gmail.com
       "token": "1|abcdefg..."
     }```
     
-📌 **API Endpoints**<br>
+📌 **API Endpoints**
      Upload CV & Report
         POST /api/upload
         Content-Type: multipart/form-data
