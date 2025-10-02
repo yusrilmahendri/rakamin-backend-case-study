@@ -8,7 +8,7 @@ Email: yusrilmahendri.yusril@gmail.com
 
 **Approach & Design**
     Endpoints:
-      ``  /v1/register → Endpoint untuk mendaftar user baru.
+      ```/v1/register → Endpoint untuk mendaftar user baru.
         /v1//login → Endpoint untuk login user.
         /v1/logout → Logout user, token dihapus.
         /v1/upload → Upload file atau data untuk dievaluasi (misal dokumen).
@@ -59,7 +59,7 @@ Email: yusrilmahendri.yusril@gmail.com
     ```{
       "email": "user@example.com",
       "password": "secret123"
-    }```<br>
+    }```
     Response akan mengembalikan token:
    ``` {
       "user": { "id": 1, "name": "User", "email": "user@example.com" },
