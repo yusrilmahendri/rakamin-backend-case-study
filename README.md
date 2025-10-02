@@ -159,10 +159,10 @@ Atau jalankan queue worker:
     ```composer install```
     
 3. **Setup Environment**
-    Copy .env.example ke .env lalu sesuaikan konfigurasi:
+    **Copy .env.example ke .env lalu sesuaikan konfigurasi:**
        ```cp .env.example .env```
-    ```Database config (DB_DATABASE, DB_USERNAME, DB_PASSWORD)
-    OpenAI API Key:
+    ```Database config (DB_DATABASE, DB_USERNAME, DB_PASSWORD)```
+   ** OpenAI API Key:**
         ```OPENAI_API_KEY=your_api_key_here```
 4. **Generate App Key**
     ```php artisan key:generate```
