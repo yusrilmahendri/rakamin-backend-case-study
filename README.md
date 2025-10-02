@@ -1,9 +1,9 @@
-📘 **AI-Powered CV & Project Evaluator**
+📘 **AI-Powered CV & Project Evaluator**<br>
 AI-Powered Candidate Screening Backend
 A backend service to evaluate candidate CVs and project reports against a job description and case study brief using AI/LLM + RAG pipeline.
 
 **Candidate Information**
-Full Name: Yusril Mahendri, S.Kom.
+Full Name: Yusril Mahendri, S.Kom.<br>
 Email: yusrilmahendri.yusril@gmail.com
 
 **Approach & Design**
@@ -47,27 +47,27 @@ Email: yusrilmahendri.yusril@gmail.com
     Kandidat tanpa pengalaman relevan → evaluasi tetap jalan dengan feedback default.
 
 🔑 **Authentication (Sanctum)**
-   ``` POST /api/register
-    {
+    POST /api/register
+    ```{
       "name": "User",
       "email": "user@example.com",
       "password": "secret123",
       "password_confirmation": "secret123"
-    }
+    }```
     **LOGIN**
     POST /api/login
-    {
+    ```{
       "email": "user@example.com",
       "password": "secret123"
-    }
+    }```
     Response akan mengembalikan token:
-    {
+   ``` {
       "user": { "id": 1, "name": "User", "email": "user@example.com" },
       "token": "1|abcdefg..."
     }```
     
 📌 **API Endpoints**
-   ``` Upload CV & Report
+     Upload CV & Report
         POST /api/upload
         Content-Type: multipart/form-data
         Authorization: Bearer <token>
@@ -75,34 +75,34 @@ Email: yusrilmahendri.yusril@gmail.com
         report: file.pdf
     
     response 
-        { "cv_id": 1, "report_id": 2 }
+        ```{ "cv_id": 1, "report_id": 2 }```
         
     Evaluate
         POST /api/evaluate
         Authorization: Bearer <token>
 
         response: 
-        {
+       ```{
             "id": 2,
             "status": "queued"
-        }
+        }```
 
     Check Status
         GET /api/status/{jobId}
         Authorization: Bearer <token>
        
         response:
-        {
+    ```    {
             "id": 1,
             "status": "completed"
-        }
+        }```
 
     Get Result
         GET /api/result/{jobId}
         Authorization: Bearer <token>
         
         response:
-        {
+      ```  {
             "id": 1,
             "status": "completed",
             "result": {
