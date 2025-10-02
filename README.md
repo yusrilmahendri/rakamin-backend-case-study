@@ -152,8 +152,8 @@ Atau jalankan queue worker:
 
 ## ⚙️ Setup Project
 1. **Clone Repository**
-   ```git clone https://github.com/yusrilmahendri/rakamin-backend-case-study.git
-   cd rakamin-backend-case-study```
+   ```git clone https://github.com/yusrilmahendri/rakamin-backend-case-study.git```
+   ```cd rakamin-backend-case-study```
 
 2. **Install Dependencies**
     ```composer install```
@@ -162,7 +162,7 @@ Atau jalankan queue worker:
     **Copy .env.example ke .env lalu sesuaikan konfigurasi:**
        ```cp .env.example .env```
     ```Database config (DB_DATABASE, DB_USERNAME, DB_PASSWORD)```
-   ** OpenAI API Key:**
+   OpenAI API Key:
         ```OPENAI_API_KEY=your_api_key_here```
 4. **Generate App Key**
     ```php artisan key:generate```
