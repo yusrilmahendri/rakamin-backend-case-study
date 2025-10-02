@@ -162,7 +162,7 @@ Atau jalankan queue worker:
     **Copy .env.example ke .env lalu sesuaikan konfigurasi:**
        ```cp .env.example .env```
     ```Database config (DB_DATABASE, DB_USERNAME, DB_PASSWORD)```
-   OpenAI API Key:
+   <br>OpenAI API Key:
         ```OPENAI_API_KEY=your_api_key_here```
 4. **Generate App Key**
     ```php artisan key:generate```
