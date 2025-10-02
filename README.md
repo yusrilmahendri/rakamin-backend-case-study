@@ -53,7 +53,7 @@ Email: yusrilmahendri.yusril@gmail.com
       "email": "user@example.com",
       "password": "secret123",
       "password_confirmation": "secret123"
-    }```
+    }<br>
     **LOGIN**<br>
     POST /api/login<br>
     ```{
@@ -64,7 +64,7 @@ Email: yusrilmahendri.yusril@gmail.com
    ``` {
       "user": { "id": 1, "name": "User", "email": "user@example.com" },
       "token": "1|abcdefg..."
-    }```
+    }<br>
     
 📌 **API Endpoints**<br>
      Upload CV & Report
