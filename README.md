@@ -1,66 +1,169 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+📘 **AI-Powered CV & Project Evaluator**
+AI-Powered Candidate Screening Backend
+A backend service to evaluate candidate CVs and project reports against a job description and case study brief using AI/LLM + RAG pipeline.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Candidate Information**
+    Full Name: Yusril Mahendri, S.Kom.
+    Email: yusrilmahendri.yusril@gmail.com
 
-## About Laravel
+**Approach & Design**
+    Endpoints:
+        /v1/register → Endpoint untuk mendaftar user baru.
+        /v1//login → Endpoint untuk login user.
+        /v1/logout → Logout user, token dihapus.
+        /v1/upload → Upload file atau data untuk dievaluasi (misal dokumen).
+        /v1/evaluate → Menjalankan proses evaluasi berdasarkan data yang diupload.
+        /v1/status/{id} → Mengecek status evaluasi berdasarkan id.
+        /v1/result/{id} → Mengambil hasil evaluasi berdasarkan id.
+    Database Schema:
+        documents → menyimpan file CV, Report, JobDesc, Rubric.
+        jobs → menyimpan status evaluasi (queued, processing, completed, failed).
+        results → menyimpan hasil evaluasi (skor + feedback).
+        
+**Job Queue**
+    Gunakan Laravel Queue + Redis untuk eksekusi asynchronous.
+    Worker memproses parsing PDF, memanggil API LLM, dan menyimpan hasil evaluasi.
+    
+**LLM Integration**
+    Provider: OpenAI (gpt-4o-mini).
+    Prompt Design:
+        CV Evaluation → menilai skills, experience, achievements, cultural fit.
+        Project Evaluation → menilai correctness, code quality, resilience, documentation.
+        Final Analysis → gabungan CV + Project menjadi overall summary.
+        Temperature: 0.2 untuk menjaga konsistensi.
+        
+**RAG Strategy**
+    Versi awal (MVP): gunakan teks dari Job Description + Case Study Brief yang sudah di-ingest manual.
+    Future: integrasi dengan vector DB (ChromaDB/Qdrant) untuk retrieval otomatis.
+    
+**Error Handling**
+    Gunakan try/catch pada job.
+    Jika LLM gagal (timeout/rate limit) → retry dengan backoff.
+    Status job diupdate → failed bila tidak berhasil.
+    
+**Edge Cases**
+    File PDF kosong/korup.
+    API LLM timeout.
+    Kandidat tanpa pengalaman relevan → evaluasi tetap jalan dengan feedback default.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+🔑 **Authentication (Sanctum)**
+    POST /api/register
+    {
+      "name": "User",
+      "email": "user@example.com",
+      "password": "secret123",
+      "password_confirmation": "secret123"
+    }
+    **LOGIN**
+    POST /api/login
+    {
+      "email": "user@example.com",
+      "password": "secret123"
+    }
+    Response akan mengembalikan token:
+    {
+      "user": { "id": 1, "name": "User", "email": "user@example.com" },
+      "token": "1|abcdefg..."
+    }
+    
+📌 **API Endpoints**
+    Upload CV & Report
+        POST /api/upload
+        Content-Type: multipart/form-data
+        Authorization: Bearer <token>
+        cv: file.pdf
+        report: file.pdf
+    
+    response 
+        { "cv_id": 1, "report_id": 2 }
+        
+    Evaluate
+        POST /api/evaluate
+        Authorization: Bearer <token>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+        response: 
+        {
+            "id": 2,
+            "status": "queued"
+        }
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+    Check Status
+        GET /api/status/{jobId}
+        Authorization: Bearer <token>
+       
+        response:
+        {
+            "id": 1,
+            "status": "completed"
+        }
 
-## Learning Laravel
+    Get Result
+        GET /api/result/{jobId}
+        Authorization: Bearer <token>
+        
+        response:
+        {
+            "id": 1,
+            "status": "completed",
+            "result": {
+                "id": 1,
+                "job_id": 1,
+                "cv_match_rate": 0.78,
+                "cv_feedback": "No feedback",
+                "project_score": 3,
+                "project_feedback": "No feedback",
+                "overall_summary": "Candidate has strong backend skills with some AI exposure. Could improve resilience.",
+                "created_at": "2025-10-02T18:56:18.000000Z",
+                "updated_at": "2025-10-02T18:56:18.000000Z"
+            }
+        }
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**testing**
+Gunakan Postman atau cURL untuk mencoba semua endpoint.
+Atau jalankan queue worker:
+    php artisan queue:work
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+ 📂 **Project Structure**
+ ```app/
+ ├── Http/
+ │   └── Controllers/
+ │       └── EvaluationController.php
+ │       └── AuthController.php
+ ├── Jobs/
+ │   └── ProcessEvaluation.php
+ ├── Models/
+ │   └── Document.php
+ │   └── Job.php
+ │   └── Result.php
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🚀 Tech Stack
+- [Laravel 10](https://laravel.com/) - PHP Framework
+- [MySQL](https://www.mysql.com/) - Database
+- [Laravel Sanctum](https://laravel.com/docs/10.x/sanctum) - API Authentication
+- [Smalot/pdfparser](https://github.com/smalot/pdfparser) - PDF Parsing
+- [OpenAI API](https://platform.openai.com/) - LLM Integration
+- Queue (Sync/Database/Redis)
 
-## Laravel Sponsors
+## ⚙️ Setup Project
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1. **Clone Repository**
+   ```bash
+   git clone https://github.com/yusrilmahendri/rakamin-backend-case-study.git
+   cd rakamin-backend-case-study
 
-### Premium Partners
+2. **Install Dependencies**
+    composer install
+    
+3. **Setup Environment**
+    Copy .env.example ke .env lalu sesuaikan konfigurasi:
+       cp .env.example .env
+    Database config (DB_DATABASE, DB_USERNAME, DB_PASSWORD)
+    OpenAI API Key:
+        OPENAI_API_KEY=your_api_key_here
+4. **Generate App Key**
+    php artisan key:generate
+5. **Migrate Database**
+    php artisan migrate
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
