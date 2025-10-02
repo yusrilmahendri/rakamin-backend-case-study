@@ -1,8 +1,8 @@
-📘 **AI-Powered CV & Project Evaluator**<br>
+📘 **AI-Powered CV & Project Evaluator**<br><br>
 AI-Powered Candidate Screening Backend
 A backend service to evaluate candidate CVs and project reports against a job description and case study brief using AI/LLM + RAG pipeline.
 
-**Candidate Information**
+**Candidate Information**<br>
 Full Name: Yusril Mahendri, S.Kom.<br>
 Email: yusrilmahendri.yusril@gmail.com
 
