@@ -159,7 +159,7 @@ Atau jalankan queue worker:
     ```composer install```
     
 3. **Setup Environment**
-    **Copy .env.example ke .env lalu sesuaikan konfigurasi:**
+    <br>Copy .env.example ke .env lalu sesuaikan konfigurasi:
        ```cp .env.example .env```
     ```Database config (DB_DATABASE, DB_USERNAME, DB_PASSWORD)```
    <br>OpenAI API Key:
