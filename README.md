@@ -8,13 +8,13 @@ Email: yusrilmahendri.yusril@gmail.com
 
 **Approach & Design**
     Endpoints:<br>
-         </n>/v1/register → Endpoint untuk mendaftar user baru.<br>
-         </n>/v1//login → Endpoint untuk login user.<br>
-         </n>/v1/logout → Logout user, token dihapus.<br>
-         </n>v1/upload → Upload file atau data untuk dievaluasi (misal dokumen).<br>
-         </n>/v1/evaluate → Menjalankan proses evaluasi berdasarkan data yang diupload.<br>
-         </n>/v1/status/{id} → Mengecek status evaluasi berdasarkan id.<br>
-         </n>/v1/result/{id} → Mengambil hasil evaluasi berdasarkan id. <br>
+         /v1/register → Endpoint untuk mendaftar user baru.<br>
+         /v1//login → Endpoint untuk login user.<br>
+         /v1/logout → Logout user, token dihapus.<br>
+         /v1/upload → Upload file atau data untuk dievaluasi (misal dokumen).<br>
+         /v1/evaluate → Menjalankan proses evaluasi berdasarkan data yang diupload.<br>
+         /v1/status/{id} → Mengecek status evaluasi berdasarkan id.<br>
+         /v1/result/{id} → Mengambil hasil evaluasi berdasarkan id. <br>
     Database Schema:<br>
         documents → menyimpan file CV, Report, JobDesc, Rubric.<br>
         jobs → menyimpan status evaluasi (queued, processing, completed, failed).<br>
@@ -48,28 +48,28 @@ Email: yusrilmahendri.yusril@gmail.com
 
 🔑 **Authentication (Sanctum)**
     
-    POST /api/register<br>
+   ``` POST /api/register<br>
    
-    ```{
+    {
       "name": "User",
       "email": "user@example.com",
       "password": "secret123",
       "password_confirmation": "secret123"
-    }```
+    }
 
     
     LOGIN
     POST /api/login<br>
-   ``` {
+    {
       "email": "user@example.com",
       "password": "secret123"
-    }```
+    }
     
     Response akan mengembalikan token:
-   ```{
+   {
       "user": { "id": 1, "name": "User", "email": "user@example.com" },
       "token": "1|abcdefg..."
-    }```
+    }
     
 📌 **API Endpoints**
      Upload CV & Report
@@ -80,34 +80,34 @@ Email: yusrilmahendri.yusril@gmail.com
         report: file.pdf<br>
     
     response 
-        ```{ "cv_id": 1, "report_id": 2 }```<br>
+       { "cv_id": 1, "report_id": 2 }```<br>
         
         Evaluate
         POST /api/evaluate
         Authorization: Bearer <token>
 
         response: 
-       ```{
+       {
             "id": 2,
             "status": "queued"
-        }```<br>
+        }
 
     Check Status
         GET /api/status/{jobId}
         Authorization: Bearer <token>
        
         response:
-    ```    {
+       {
             "id": 1,
             "status": "completed"
-        }```<br>
+        }
 
     Get Result
         GET /api/result/{jobId}
         Authorization: Bearer <token>
         
         response:
-      ```  {
+       {
             "id": 1,
             "status": "completed",
             "result": {
@@ -121,7 +121,7 @@ Email: yusrilmahendri.yusril@gmail.com
                 "created_at": "2025-10-02T18:56:18.000000Z",
                 "updated_at": "2025-10-02T18:56:18.000000Z"
             }
-        }```
+        }
 
 **testing**
 Gunakan Postman atau cURL untuk mencoba semua endpoint.
