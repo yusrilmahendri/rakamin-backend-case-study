@@ -46,22 +46,27 @@ Email: yusrilmahendri.yusril@gmail.com
     API LLM timeout.
     Kandidat tanpa pengalaman relevan → evaluasi tetap jalan dengan feedback default.
 
-🔑 **Authentication (Sanctum)**<br>
+🔑 **Authentication (Sanctum)**
+    
     POST /api/register<br>
+   
     ```{
       "name": "User",
       "email": "user@example.com",
       "password": "secret123",
       "password_confirmation": "secret123"
     }```
+
+    
     **LOGIN**
     POST /api/login<br>
    ``` {
       "email": "user@example.com",
       "password": "secret123"
-    }
+    }```
+    
     Response akan mengembalikan token:
-   {
+   ```{
       "user": { "id": 1, "name": "User", "email": "user@example.com" },
       "token": "1|abcdefg..."
     }```
