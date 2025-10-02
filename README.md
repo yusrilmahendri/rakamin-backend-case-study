@@ -156,17 +156,17 @@ Atau jalankan queue worker:
    cd rakamin-backend-case-study
 
 2. **Install Dependencies**
-    composer install
+    ```composer install
     
 3. **Setup Environment**
     Copy .env.example ke .env lalu sesuaikan konfigurasi:
-       cp .env.example .env
-    Database config (DB_DATABASE, DB_USERNAME, DB_PASSWORD)
+       ```cp .env.example .env
+    ```Database config (DB_DATABASE, DB_USERNAME, DB_PASSWORD)
     OpenAI API Key:
-        OPENAI_API_KEY=your_api_key_here
+        ```OPENAI_API_KEY=your_api_key_here
 4. **Generate App Key**
-    php artisan key:generate
+    ```php artisan key:generate
 5. **Migrate Database**
-    php artisan migrate
+    ```php artisan migrate
 
 
