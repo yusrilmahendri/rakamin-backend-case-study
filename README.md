@@ -160,8 +160,8 @@ Atau jalankan queue worker:
     
 3. **Setup Environment**
     <br>Copy .env.example ke .env lalu sesuaikan konfigurasi:
-       ```cp .env.example .env```
-    ```Database config (DB_DATABASE, DB_USERNAME, DB_PASSWORD)```
+     <br> ```cp .env.example .env```
+   <br> ```Database config (DB_DATABASE, DB_USERNAME, DB_PASSWORD)```
    <br>OpenAI API Key:
         ```OPENAI_API_KEY=your_api_key_here```
 4. **Generate App Key**
