@@ -7,18 +7,18 @@ Full Name: Yusril Mahendri, S.Kom.<br>
 Email: yusrilmahendri.yusril@gmail.com
 
 **Approach & Design**
-    Endpoints:
-      ```/v1/register → Endpoint untuk mendaftar user baru.
-        /v1//login → Endpoint untuk login user.
-        /v1/logout → Logout user, token dihapus.
-        /v1/upload → Upload file atau data untuk dievaluasi (misal dokumen).
-        /v1/evaluate → Menjalankan proses evaluasi berdasarkan data yang diupload.
-        /v1/status/{id} → Mengecek status evaluasi berdasarkan id.
-        /v1/result/{id} → Mengambil hasil evaluasi berdasarkan id. ```
-    Database Schema:
-        documents → menyimpan file CV, Report, JobDesc, Rubric.
-        jobs → menyimpan status evaluasi (queued, processing, completed, failed).
-        results → menyimpan hasil evaluasi (skor + feedback).
+    Endpoints:<br>
+        /v1/register → Endpoint untuk mendaftar user baru.<br>
+        /v1//login → Endpoint untuk login user.<br>
+        /v1/logout → Logout user, token dihapus.<br>
+        /v1/upload → Upload file atau data untuk dievaluasi (misal dokumen).<br>
+        /v1/evaluate → Menjalankan proses evaluasi berdasarkan data yang diupload.<br>
+        /v1/status/{id} → Mengecek status evaluasi berdasarkan id.<br>
+        /v1/result/{id} → Mengambil hasil evaluasi berdasarkan id. <br>
+    Database Schema:<br>
+        documents → menyimpan file CV, Report, JobDesc, Rubric.<br>
+        jobs → menyimpan status evaluasi (queued, processing, completed, failed).<br>
+        results → menyimpan hasil evaluasi (skor + feedback).<br>
         
 **Job Queue**
     Gunakan Laravel Queue + Redis untuk eksekusi asynchronous.
@@ -148,20 +148,20 @@ Atau jalankan queue worker:
 ## ⚙️ Setup Project
 1. **Clone Repository**
    ```git clone https://github.com/yusrilmahendri/rakamin-backend-case-study.git
-   cd rakamin-backend-case-study```
+   cd rakamin-backend-case-study
 
 2. **Install Dependencies**
-    ```composer install```
+    ```composer install
     
 3. **Setup Environment**
     Copy .env.example ke .env lalu sesuaikan konfigurasi:
        cp .env.example .env
     Database config (DB_DATABASE, DB_USERNAME, DB_PASSWORD)
     OpenAI API Key:
-        ```OPENAI_API_KEY=your_api_key_here```
+        ```OPENAI_API_KEY=your_api_key_here
 4. **Generate App Key**
-    ```php artisan key:generate```
+    ```php artisan key:generate
 5. **Migrate Database**
-    php artisan migrate
+    ```php artisan migrate
 
 
